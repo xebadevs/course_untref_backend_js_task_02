@@ -1,1 +1,7 @@
-# course_untref_backend_js_task_02
+# UNTREF
+
+### BackEnd Course with Node JS
+
+### Assignment 02 to deliver
+
+- It will be specified in the attached `.pdf` file
