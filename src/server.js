@@ -15,21 +15,24 @@ server.use(express.urlencoded({ extended: true }));
 server.use("/public", express.static(path.join(__dirname, "public")));
 
 server.get("/api/v1/muebleria", async (req, res) => {
-  const { marca, precio, precio_mayor_que } = req.query;
+  const { codigo, nombre, precio, categoria } = req.query;
   let coches = [];
 
   try {
     const collection = await connectToCollection("muebleria");
-    if (marca) coches = await collection.find({ marca }).toArray();
-    else if (precio === "min")
-      coches = await collection.find().sort({ precio: 1 }).limit(1).toArray();
-    else if (precio === "max")
-      coches = await collection.find().sort({ precio: -1 }).limit(1).toArray();
-    else if (precio_mayor_que)
-      coches = await collection
-        .find({ precio: { $gt: Number(precio_mayor_que) } })
-        .toArray();
-    else coches = await collection.find().toArray();
+
+    // if (marca) coches = await collection.find({ marca }).toArray();
+    // else if (precio === "min")
+    //   coches = await collection.find().sort({ precio: 1 }).limit(1).toArray();
+    // else if (precio === "max")
+    //   coches = await collection.find().sort({ precio: -1 }).limit(1).toArray();
+    // else if (precio_mayor_que)
+    //   coches = await collection
+    //     .find({ precio: { $gt: Number(precio_mayor_que) } })
+    //     .toArray();
+    coches = await collection.find().toArray();
+
+    // const muebles = await collection.find({}).toArray();
 
     res.status(200).send(JSON.stringify(coches, null, "\t"));
   } catch (error) {
